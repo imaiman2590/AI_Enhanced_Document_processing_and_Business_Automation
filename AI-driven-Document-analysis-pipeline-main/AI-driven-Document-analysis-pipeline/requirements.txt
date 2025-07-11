@@ -2,6 +2,7 @@ torch
 transformers
 pytesseract
 PyPDF2
+db-sqlite3
 mysql-connector-python
 torchcrf
 pandas==1.5.2
