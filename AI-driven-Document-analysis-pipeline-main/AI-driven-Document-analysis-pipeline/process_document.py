@@ -7,7 +7,6 @@ from src.database import save_invoice_data
 from src.utils import load_tokenizer, load_tag_map
 
 def process_document(file_path, file_type, decision_engine, ner_model=None, tokenizer=None, tag_map=None):
-    # Extract text based on document type
     file_extractors = {
         "pdf": extract_text_from_pdf,
         "image": extract_text_from_image,
@@ -18,13 +17,10 @@ def process_document(file_path, file_type, decision_engine, ner_model=None, toke
     if file_type not in file_extractors:
         raise ValueError(f"Unsupported file type: {file_type}")
     
-    # Extract the text from the document using the appropriate extractor
     text = file_extractors[file_type](file_path)
     
-    # Initialize document data
     document_data = {}
 
-    # If NER model, tokenizer, and tag map are provided, extract entities
     if ner_model and tokenizer and tag_map:
         entities = extract_entities(text, ner_model, tokenizer, tag_map)
         document_data.update(entities)
